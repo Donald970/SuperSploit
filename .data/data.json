@@ -1,10 +1,11 @@
 {
-    "EXE": null,
+    "EXE": "/bin/sudo",
+    "EXPLOIT": "/home/donaldford05091997/SuperSploit/exploits/chromeOs/test.py",
     "HOST ": "",
     "KERNEL_VERSION": null,
     "PORT": 0,
-    "RHOST": null,
-    "RPORT": null,
+    "RHOST": "0.0.0.0",
+    "RPORT": "9997",
     "TARGET_VERSION": null,
-    "UID": null
+    "UID": "0"
 }

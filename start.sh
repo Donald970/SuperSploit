@@ -1,1 +1,1 @@
-python3 supersploit.py
+sudo python3 supersploit.py

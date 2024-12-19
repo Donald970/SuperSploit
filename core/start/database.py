@@ -33,27 +33,30 @@ class jsdm:
 	
     @staticmethod
     def checkDb():
-        if os.path.exists(install_location):
-            if os.path.exists(database):
-                with open(f"{database}/data.json") as file:
-                    data = json.load(file)
-                    file.close()
+        try:
+            if os.path.exists(install_location):
+                if os.path.exists(database):
+                    with open(f"{database}/data.json") as file:
+                        data = json.load(file)
+                        file.close()
+                        return data
+                else:
+                    sys.stderr.write("[!] Database file not found!")
+                    os.mkdir(database)
+                    with open(f"{database}/data.json", "w") as file:
+                        data = {"HOST ": "", "PORT": 0}
+                        file.write(json.dumps(data))
+                        file.close()
                     return data
             else:
-                sys.stderr.write("[!] Database file not found!")
-                os.mkdir(database)
+                os.mkdir(install_location)
                 with open(f"{database}/data.json", "w") as file:
                     data = {"HOST ": "", "PORT": 0}
                     file.write(json.dumps(data))
                     file.close()
                 return data
-        else:
-            os.mkdir(install_location)
-            with open(f"{database}/data.json", "w") as file:
-                data = {"HOST ": "", "PORT": 0}
-                file.write(json.dumps(data))
-                file.close()
-            return data
+        except Exception as e:
+            print(e)
 
     @staticmethod
     def update(data):

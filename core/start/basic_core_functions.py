@@ -25,6 +25,7 @@ import sys, subprocess
 from .database import jsdm, exmgt
 from .use import Use
 from .exploit import exploit
+
 install_location = f"/home/{os.getlogin()}/SuperSploit"
 data_install_location = f"/home/{os.getlogin()}/SuperSploit/.data"
 database = f"{install_location}/.data"
@@ -75,15 +76,15 @@ class bcf:
     def handle_data(cls, data):
         if data == "exit":
             sys.exit()
-        inputs = ["show", "update", "set", "add", "del", "help", "search", "use", "exploit"]
+        inputs = ["show", "update", "set", "add", "del", "help", "search", "use", "run"]
         funcs = [jsdm.showBD, cls.updateDb, jsdm.set, jsdm.add, jsdm.Del, cls.help, exmgt.search, Use.use, exploit.exploit]
         if data.split(" ")[0] not in inputs:
             try:
                 subprocess.run(data.split(' '))
                 return
             except Exception as e:
-                if "[Errno 13]" in str(e):
-                    return
+                # if "[Errno 13]" in str(e):
+                #   return
                 sys.stdout.write(str(e))
         try:
             funcs[inputs.index(data.split(" ")[0])](data)
@@ -99,7 +100,7 @@ class bcf:
             from prompt_toolkit.history import FileHistory
             from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
         except ImportError:
-            pass
+            print("import error")
         try:
             his = FileHistory(f"{data_install_location}/.history")
             inputa = prompt_toolkit.PromptSession(history=his, auto_suggest=AutoSuggestFromHistory(), enable_history_search=True)
