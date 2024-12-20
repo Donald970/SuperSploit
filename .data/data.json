@@ -1,6 +1,6 @@
 {
-    "EXE": "/bin/sudo",
-    "EXPLOIT": "/home/donaldford05091997/SuperSploit/exploits/chromeOs/test.py",
+    "EXE": "/bin/bash",
+    "EXPLOIT": "/home/donaldford05091997/SuperSploit/exploits/chromeOs/module_test.py",
     "HOST ": "",
     "KERNEL_VERSION": null,
     "PORT": 0,
