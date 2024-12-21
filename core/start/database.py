@@ -1,4 +1,4 @@
-#
+# This is the class responsible for all the json database managment
 #  database.py
 #  
 #  Copyright 2024 donaldford05091997 <donaldford05091997@penguin>
