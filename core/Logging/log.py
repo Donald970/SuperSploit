@@ -13,5 +13,3 @@ class Logger:
             file.write(data)
             file.close()
             return
-
-
