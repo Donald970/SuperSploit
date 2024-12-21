@@ -22,17 +22,18 @@
 import os
 import sys
 import json
+from ..Logging import Logger
 install_location = f"/home/{os.getlogin()}/SuperSploit"
 data_install_location = f"{install_location}/.data"
 database = f"{install_location}/.data"
 
 
-class jsdm:
+class jsdm(Logger):
     def __init__(self):
         return
 	
-    @staticmethod
-    def checkDb():
+    @classmethod
+    def checkDb(cls):
         try:
             if os.path.exists(install_location):
                 if os.path.exists(database):
@@ -56,6 +57,7 @@ class jsdm:
                     file.close()
                 return data
         except Exception as e:
+            cls.__start_logger_object__(str(e))
             print(e)
 
     @staticmethod
@@ -121,7 +123,7 @@ class exmgt(jsdm):
     def search(cls, da):
         try:
             if da.split(" ")[1] == "exploits":
-                """add the ablity to search outside install locations"""
+                """add the ability to search outside install locations"""
                 exploits = []
                 for x in os.listdir(f"{install_location}/exploits"):
                     for i in os.listdir(f"{install_location}/exploits/{x}"):
@@ -139,6 +141,27 @@ class exmgt(jsdm):
                     for y in exploits:
                         if x in y:
                             print(f"{exploits.index(y)}: {y}")
+                return
+
+            if da.split(" ")[1] == "payloads":
+                """add the ability to search outside install locations"""
+                payloads = []
+                for x in os.listdir(f"{install_location}/payloads"):
+                    for i in os.listdir(f"{install_location}/payloads/{x}"):
+                        file = f"{install_location}/payloads/{x}/{i}"
+                        payloads.append(file)
+
+                daL = da.split(" ")
+                searches = daL[2:]
+                if len(searches) == 0:
+                    for i in payloads:
+                        print(f"{payloads.index(i)}: {i}")
+                    return
+                for x in searches:
+                    print(f"search results for {x}")
+                    for y in payloads:
+                        if x in y:
+                            print(f"{payloads.index(y)}: {y}")
                 return
         except Exception as e:
             return e
