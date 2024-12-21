@@ -25,21 +25,22 @@ import sys, subprocess
 from .database import jsdm, exmgt
 from .use import Use
 from .exploit import exploit
+from ..Logging import Logger
 
 install_location = f"/home/{os.getlogin()}/SuperSploit"
 data_install_location = f"/home/{os.getlogin()}/SuperSploit/.data"
 database = f"{install_location}/.data"
 
 
-class bcf:
+class bcf(Logger):
 
     def __init__(self):
         return
 
-    @staticmethod
-    def updateDb(da):
+    @classmethod
+    def updateDb(cls, da):
         try:
-            sys.stdout.write("Updating exploit details database. \n")
+            sys.stdout.write("[*] Updating exploit details database. \n")
             vars = []
             oldDb = jsdm.checkDb()
             for x in os.listdir(f"{install_location}/exploits"):
@@ -60,6 +61,7 @@ class bcf:
                     oldDb[k] = None
             jsdm.update(oldDb)
         except Exception as e:
+            cls.__start_logger_object__(str(e))
             print(e)
 
     @classmethod
@@ -67,7 +69,7 @@ class bcf:
         if len(data) > len("help"):
             sys.stdout.write("not implemented yet \n")
             return
-        with open(f"{install_location}/.data/.help/help") as file:
+        with open(f"{data_install_location}/.help/help") as file:
             sys.stdout.write(f"{file.read()} \n")
             file.close()
             return
@@ -85,25 +87,30 @@ class bcf:
             except Exception as e:
                 # if "[Errno 13]" in str(e):
                 #   return
+                cls.__start_logger_object__(str(e))
                 sys.stdout.write(str(e))
         try:
             funcs[inputs.index(data.split(" ")[0])](data)
             return True
         except Exception as e:
+            cls.__start_logger_object__(str(e))
             sys.stdout.write(f"{str(e)}\n")
             return
 
-    @staticmethod
-    def getData():
+    @classmethod
+    def get_data(cls):
         try:
             import prompt_toolkit
             from prompt_toolkit.history import FileHistory
             from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
         except ImportError:
-            print("import error")
+            print("[!] using standard input function no io control available")
+            cls.__start_logger_object__("Prompt toolkit not installed.")
+            pass
         try:
             his = FileHistory(f"{data_install_location}/.history")
             inputa = prompt_toolkit.PromptSession(history=his, auto_suggest=AutoSuggestFromHistory(), enable_history_search=True)
             return inputa.prompt("superploit: ")
         except NameError:
+
             return input("superploit: ")
