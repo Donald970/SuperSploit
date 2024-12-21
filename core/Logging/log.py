@@ -1,6 +1,6 @@
 from os import getlogin
 install_location = f"/home/{getlogin()}/SuperSploit"
-data_location = f"{install_location}/.data/.dev_logs"
+data_location = f"{install_location}/.data/.dev_logs/log"
 import traceback
 class Logger:
     def __init(self):
@@ -9,7 +9,7 @@ class Logger:
     @classmethod
     def __start_logger_object__(cls, data: str):
         with open(f"{data_location}", "a") as file:
-            data = data =+ "\n"
+            data = f"{data}\n"
             file.write(data)
             file.close()
             return
