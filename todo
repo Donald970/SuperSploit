@@ -1,3 +1,9 @@
-Add the search feature and use feature use c for search
-add exploit capability
+* run a location and stability test
 
+* add the aliases, db and config setup files 
+
+* improve custom help class and output
+
+* run compatible test for minimal config
+
+* improve input handler 
