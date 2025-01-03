@@ -23,5 +23,4 @@
 #  
 
 from .database import jsdm
-from .basic_core_functions import bcf
 from .exploit import exploit

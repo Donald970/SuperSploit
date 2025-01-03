@@ -1,0 +1,7 @@
+Help section for add command:
+  Used to add a variable to the database
+    [Usage]
+         add [variable] [value]
+
+    [example]
+         add host 0.0.0.0

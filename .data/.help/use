@@ -1,0 +1,18 @@
+Help section for use command:
+  Used to assign a value to exploit and payload variables
+    [Usage]
+        use [specifier] [identifier]
+           * identifier -> Integer index of exploit or payload
+
+    [Specifiers]
+            * exploit
+            * payload
+
+    [example]
+            use exploit 1
+
+
+
+
+
+

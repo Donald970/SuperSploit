@@ -1,0 +1,5 @@
+Help section for update command:
+  Used to add all variables found in local exploit database to the variable database.
+  Searches all the local exploits for new variables, then adds them to the database.
+    [Usage]
+         update

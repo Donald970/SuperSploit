@@ -1,0 +1,7 @@
+Help section for set command:
+  Used to set a variable to a specified value
+    [Usage]
+        set [variable] [Value]
+
+    [example]
+        set host 0.0.0.0

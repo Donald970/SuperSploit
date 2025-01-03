@@ -1,0 +1,7 @@
+Help section for del command:
+  Used to remove a variable from the database
+    [Usage]
+         del [variable]
+
+    [example]
+         del host

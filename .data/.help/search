@@ -1,0 +1,7 @@
+Help section for search command:
+  Used to search the local exploit and payload database
+    [Usage]
+        search [type] [query]
+
+    [example]
+        search exploits chrome

@@ -1,10 +1,23 @@
 Supersploit help page:
-    help - Shows this message
-    show - Shows saved variables
-    set - Set a saved variable
-    search - Search for exploits
-    use - Use a exploit
-    update - Update variable database
-    add - Add a variable
-    del - Delete a variable
-    run - Run the selected exploit
+    [usage]
+        * help [args]
+
+    [MainMenu commands]
+
+        * help - Shows this message
+
+        * show - Shows saved variables
+
+        * set - Set a saved variable
+
+        * search - Search for exploits
+
+        * use - Use a exploit
+
+        * update - Update variable database
+
+        * add - Add a variable
+
+        * del - Delete a variable
+
+        * exploit - Run the selected exploit

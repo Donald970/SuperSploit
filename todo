@@ -1,3 +1,5 @@
-Add the search feature and use feature use c for search
-add exploit capability
+1.) Run compatibility, location and stability test.
+    * Use python test script to do this
 
+2.) Add alias db files
+    * Create a setup script in bash or python
