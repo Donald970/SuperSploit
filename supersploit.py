@@ -22,16 +22,16 @@
 #  
 #
 import sys
-from core.start import bcf
 from core.start import jsdm as jdbm
-bcf.updateDb("")
-
+from core.start import database
+from core.start.input import Input
+database.exmgt.updateDb("")
+import os
 isRunning = True
+Input.config_check()
 
 while isRunning:
     try:
-        database = jdbm.checkDb()
-        data = bcf.get_data()
-        bcf.handle_data(data)
+        data = Input()
     except KeyboardInterrupt:
         sys.exit()

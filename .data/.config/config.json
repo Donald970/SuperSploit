@@ -1,0 +1,7 @@
+{
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/local/games:/usr/sbin:/usr/bin:/usr/games:/sbin:/bin",
+    "data install location": "/home/donaldford05091997/SuperSploit/.data",
+    "database location": "/home/donaldford05091997/SuperSploit/.data/data.json",
+    "install_location": "/home/donaldford05091997/SuperSploit",
+    "shell": true
+}

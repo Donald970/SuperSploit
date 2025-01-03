@@ -1,0 +1,4 @@
+Help section for show command:
+  Used to show a list of all variables in the database
+    [Usage]
+         show

@@ -22,10 +22,18 @@
 import os
 import sys
 import json
+import traceback
+
+config = f"/home/{os.getlogin()}/SuperSploit/.data/.config/config.json"
+
 from ..Logging import Logger
-install_location = f"/home/{os.getlogin()}/SuperSploit"
-data_install_location = f"{install_location}/.data"
-database = f"{install_location}/.data"
+with open(config, 'r') as file:
+    config_dict = json.load(file)
+    file.close()
+
+install_location = config_dict["install_location"]
+data_install_location = config_dict["data install location"]
+database = config_dict["database location"]
 
 
 class jsdm(Logger):
@@ -37,7 +45,7 @@ class jsdm(Logger):
         try:
             if os.path.exists(install_location):
                 if os.path.exists(database):
-                    with open(f"{database}/data.json") as file:
+                    with open(f"{database}") as file:
                         data = json.load(file)
                         file.close()
                         return data
@@ -62,19 +70,31 @@ class jsdm(Logger):
 
     @staticmethod
     def update(data):
-        with open(f"{database}/data.json", "w") as file:
+        with open(f"{database}", "w") as file:
             file.write(json.dumps(data, sort_keys=True, indent=4))
             file.close()
         return data
+    
+    @classmethod
+    def show(cls):
+        for k, v in cls.checkDb().items():
+            sys.stdout.write(f"{k} = {v}\n")
+        return
 
     @classmethod
-    def showBD(cls, da):
-        try:
-            for k, v in cls.checkDb().items():
-                sys.stdout.write(f"{k} = {v}\n")
+    def show_db_triger(cls, da):
+        data = da.split(" ")
+        if da == "show":
+            cls.show()
             return
-        except Exception as e:
-             print(e)
+        if data[1] == '':
+            cls.show()
+            return
+        data1 = data[1:]
+        for x in data1:
+            for k, v in cls.checkDb().items():
+                if x == k:
+                    print(f"{k} = {v}")
 
     @classmethod
     def set(cls, data):
@@ -118,6 +138,33 @@ class jsdm(Logger):
         return
 
 class exmgt(jsdm):
+
+    @classmethod
+    def updateDb(cls, da):
+        try:
+            sys.stdout.write("[*] Updating exploit details database. \n")
+            vars = []
+            oldDb = jsdm.checkDb()
+            for x in os.listdir(f"{install_location}/exploits"):
+                for i in os.listdir(f"{install_location}/exploits/{x}"):
+                    file = f"{install_location}/exploits/{x}/{i}"
+                    with open(file, "r") as rfile:
+                        data = rfile.read().split("# DETAILS #")
+                        rfile.close()
+                        fileList = str(data[1]).split("\n")
+                        for z in fileList:
+                            if fileList.index(z) > 0:
+                                if fileList.index(z) == len(fileList) - 1:
+                                    break
+                                vars.append(z)
+            for s in vars:
+                k = s.split(" ")[1]
+                if k not in oldDb:
+                    oldDb[k] = None
+            jsdm.update(oldDb)
+        except Exception as e:
+            cls.__start_logger_object__(str(traceback.format_exc()))
+            print(e)
     
     @classmethod
     def search(cls, da):
@@ -137,7 +184,7 @@ class exmgt(jsdm):
                         print(f"{exploits.index(i)}: {i}")
                     return
                 for x in searches:
-                    print(f"search results for {x}")
+                    print(f"\nsearch results for {x}")
                     for y in exploits:
                         if x in y:
                             print(f"{exploits.index(y)}: {y}")
